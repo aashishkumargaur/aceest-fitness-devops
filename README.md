@@ -1,3 +1,6 @@
+![CI](https://github.com/aashishkumargaur/aceest-fitness-devops/actions/workflows/ci.yml/badge.svg?branch=main)
+
+
 # ACEest Fitness & Gym — DevOps Assignment Starter
 
 A minimal Flask application for a fictional gym/fitness startup with unit tests, Docker containerization, and a GitHub Actions CI pipeline.
@@ -72,11 +75,37 @@ This repo includes a workflow at `.github/workflows/ci.yml` that triggers on eve
   - `GET /members/<member_id>` → fetch a member
 
 ## 📚 Assignment Mapping
-- Flask app + core routes → **Application Development**
-- Git initialized & GitHub-ready structure → **VCS Implementation**
-- `tests/test_app.py` with Pytest → **Unit Testing**
-- `pytest -q` locally and in CI → **Automated Testing**
-- Dockerfile + container run → **Containerization**
-- `.github/workflows/ci.yml` → **CI/CD pipeline (build + test on push)**
-```
+
+- **Application Development (Flask app)**
+  - `app.py` exposes:
+    - `GET /` → health check
+    - `POST /workouts` → add a workout `{ "workout": "Yoga", "duration": 30 }`
+    - `GET /workouts` → list workouts
+
+- **Version Control (Git & GitHub)**
+  - Public repo with meaningful commits on `main`.
+
+- **Unit Testing (Pytest)**
+  - `tests/test_app.py` validates:
+    - health endpoint
+    - add + list workouts flow
+    - invalid input handling
+  - `pytest.ini` sets test discovery and options.
+
+- **Automated Testing Configuration**
+  - Tests run locally via `pytest -q` and automatically in CI.
+
+- **Containerization (Docker)**
+  - `Dockerfile` builds a Python 3.11 slim image and runs the app with Gunicorn on port 8000.
+
+- **CI/CD (GitHub Actions)**
+  - `.github/workflows/ci.yml` triggers on every push/PR to:
+    1. Install dependencies
+    2. Run Pytest on the host
+    3. Build the Docker image
+    4. Run Pytest **inside** the Docker container
+
+- **Documentation**
+  - `README.md` explains local setup, testing, Docker usage, and CI/CD behavior.
+
 
