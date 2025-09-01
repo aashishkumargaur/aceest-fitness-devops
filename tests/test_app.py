@@ -1,5 +1,9 @@
-import sys, os
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+import os, sys
+import pytest   # <-- this line is missing
+import json
+
+# make sure Python can find app.py
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from app import create_app
 
