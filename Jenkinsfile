@@ -22,7 +22,7 @@ pipeline {
 
        stage('SonarQube Analysis') {
             steps {
-                withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_LOGIN')]) {
+                withCredentials([string(credentialsId: 'aceest-fitness', variable: 'SONAR_LOGIN')]) {
                     script {
                         def scannerHome = tool 'sonar-scanner'
                         withSonarQubeEnv('sonarqube-server') {
