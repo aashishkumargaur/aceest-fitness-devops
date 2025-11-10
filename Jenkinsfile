@@ -20,15 +20,18 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
+       stage('SonarQube Analysis') {
             steps {
-                script {
-                    def scannerHome = tool 'sonar-scanner'
-                    withSonarQubeEnv('sonarqube-server') {
-                        sh """
-                          ${scannerHome}/bin/sonar-scanner \
-                            -Dproject.settings=sonar-project.properties
-                        """
+                withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_LOGIN')]) {
+                    script {
+                        def scannerHome = tool 'sonar-scanner'
+                        withSonarQubeEnv('sonarqube-server') {
+                            sh """
+                              ${scannerHome}/bin/sonar-scanner \
+                                -Dproject.settings=sonar-project.properties \
+                                -Dsonar.login=${SONAR_LOGIN}
+                            """
+                        }
                     }
                 }
             }
